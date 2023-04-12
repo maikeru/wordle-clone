@@ -1,14 +1,16 @@
 import React from "react";
+import Guess from "../Guess";
+import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
+import { snapToLength } from "../../utils";
 
-function GuessResults({ guesses }) {
+function GuessResults({ guesses, answer }) {
+  const guessRows = snapToLength(guesses, NUM_OF_GUESSES_ALLOWED);
+  console.log({ guesses, guessRows });
   return (
     <div className="guess-results">
-      {guesses &&
-        guesses.map((guess, index) => (
-          <p key={index} className="guess">
-            {guess}
-          </p>
-        ))}
+      {guessRows.map((guess, index) => (
+        <Guess key={index} className="guess" guess={guess} answer={answer} />
+      ))}
     </div>
   );
 }
